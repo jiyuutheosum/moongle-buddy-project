@@ -2,7 +2,6 @@
 // import { HubHeader } from "@/hub-components/hubHeader";
 import { useRouter } from "expo-router";
 import { FilesList } from "@/hub-components/filesList";
-import { HubHeader } from "@/hub-components/hubHeader";
 import React, { useEffect, useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { useSearchParams } from "expo-router/build/hooks";

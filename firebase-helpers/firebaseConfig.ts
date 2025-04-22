@@ -15,13 +15,13 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC6F8rtiHyDBokySWEptRhgc5R75jWxRnQ",
-  authDomain: "moongle-buddy-app.firebaseapp.com",
-  projectId: "moongle-buddy-app",
-  storageBucket: "moongle-buddy-app.firebasestorage.app",
-  messagingSenderId: "383294989865",
-  appId: "1:383294989865:web:99790db58856a2fc61de38",
-  measurementId: "G-2FK95JK37V",
+  apiKey: "AIzaSyBJ7-_HqitEZBRNT3a5P95YqKUSzWhRFAs",
+  authDomain: "moongle-buddy.firebaseapp.com",
+  projectId: "moongle-buddy",
+  storageBucket: "moongle-buddy.firebasestorage.app",
+  messagingSenderId: "756178203827",
+  appId: "1:756178203827:web:03a4c1d21433de0b242cc6",
+  measurementId: "G-RWE3CKX635",
 
   // secret configs
   // apiKey: firebaseSecret.API_KEY,

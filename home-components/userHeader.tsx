@@ -11,7 +11,7 @@ type User = {
 export const UserHeader = () => {
   const { user } = useAuth();
 
-  const DATA: User = { username: user?.username, level: 3 };
+  const DATA: User = { username: user?.username ?? "Guest", level: 3 };
 
   return (
     <>

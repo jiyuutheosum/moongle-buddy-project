@@ -59,7 +59,7 @@ export const QuizzesList = () => {
 
   useEffect(() => {
     const userId = user?.uid; // Current user's ID
-    const studyHubId = id; // Current study hub's ID
+    const studyHubId = Array.isArray(id) ? id[0] : id; // Ensure studyHubId is a string
 
     if (!userId || !studyHubId) {
       setError("Missing user or study hub ID.");

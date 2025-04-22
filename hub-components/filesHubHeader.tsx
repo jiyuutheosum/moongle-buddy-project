@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-// import { UploadFileModal } from "../modal-components/uploadFileModal";
-import { CreateFlashModal } from "@/modal-components/createFlashModal";
-import { CreateQuizModal } from "@/modal-components/createQuizModal";
+import { UploadFileModal } from "@/modal-components/uploadFileModal";
 import { useLocalSearchParams } from "expo-router";
 import { doc, getDoc } from "firebase/firestore";
-// import { FIREBASE_DB } from "@/firebase/firebaseConfig"; // Update the import path as needed
 import { FIREBASE_DB } from "@/firebase-helpers";
 import { useAuth } from "@/utilities";
 
-// HubHeader Component
-export const HubHeader: React.FC = () => {
+export const FilesHubHeader: React.FC = () => {
   const { user } = useAuth();
-
   const { id } = useLocalSearchParams(); // Extracting studyHub id
   const [hubDetails, setHubDetails] = useState({ name: "", ownedBy: "", createdAt: "" });
   const [loading, setLoading] = useState(true);
-
-  const [isCreateFlashModalVisible, setCreateFlashModalVisible] = useState(false);
-  const [isCreateQuizModalVisible, setCreateQuizModalVisible] = useState(false);
+  const [isFileUploadModalVisible, setFileUploadModalVisible] = useState(false);
 
   // Fetch studyHub details from Firestore
   useEffect(() => {
@@ -50,13 +43,9 @@ export const HubHeader: React.FC = () => {
     fetchHubDetails();
   }, [id]);
 
-  // FOR CREATE FLASHCARD MODAL VISIBILITY
-  const openCreateFlashModal = () => setCreateFlashModalVisible(true);
-  const closeCreateFlashModal = () => setCreateFlashModalVisible(false);
-
-  // FOR CREATE QUIZ MODAL VISIBILITY
-  const openCreateQuizModal = () => setCreateQuizModalVisible(true);
-  const closeCreateQuizModal = () => setCreateQuizModalVisible(false);
+  // FOR FILE UPLOAD MODAL VISIBILITY
+  const openFileUploadModal = () => setFileUploadModalVisible(true);
+  const closeFileUploadModal = () => setFileUploadModalVisible(false);
 
   if (loading) {
     return <ActivityIndicator size={40} color="#FF6B6B" style={styles.loadingIndicator} />;
@@ -71,22 +60,16 @@ export const HubHeader: React.FC = () => {
         <Text style={styles.hubCreatedAt}>Created on: {hubDetails.createdAt}</Text>
       </View>
 
-      {/* Buttons for Create Flashcard and Create Quiz */}
+      {/* Button for File Upload */}
       <View style={styles.buttonWrapperView}>
-        <TouchableOpacity style={styles.buttons} onPress={openCreateFlashModal}>
-          <MaterialIcons style={styles.buttonsIcon} name="description" size={30} />
-          <Text style={styles.buttonsText}>Create Flashcards</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.buttons} onPress={openCreateQuizModal}>
-          <MaterialIcons style={styles.buttonsIcon} name="create" size={30} />
-          <Text style={styles.buttonsText}>Create Quiz</Text>
+        <TouchableOpacity style={styles.buttons} onPress={openFileUploadModal}>
+          <MaterialIcons style={styles.buttonsIcon} name="file-upload" size={30} />
+          <Text style={styles.buttonsText}>Upload File</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Modals */}
-      <CreateFlashModal hubId={id} visible={isCreateFlashModalVisible} onClose={closeCreateFlashModal} />
-      <CreateQuizModal hubId={id} visible={isCreateQuizModalVisible} onClose={closeCreateQuizModal} />
+      {/* File Upload Modal */}
+      <UploadFileModal visible={isFileUploadModalVisible} onClose={closeFileUploadModal} />
     </View>
   );
 };
@@ -94,7 +77,6 @@ export const HubHeader: React.FC = () => {
 const styles = StyleSheet.create({
   parentView: {
     margin: 20,
-    // borderWidth: 1,
     borderRadius: 10,
     borderColor: "#aaa",
     backgroundColor: "#fff",
@@ -128,10 +110,10 @@ const styles = StyleSheet.create({
   buttonWrapperView: {
     marginBottom: 15,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   buttons: {
-    width: "45%",
+    width: "60%",
     padding: 10,
     alignItems: "center",
     borderRadius: 5,

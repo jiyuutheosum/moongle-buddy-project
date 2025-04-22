@@ -17,7 +17,7 @@ export default function MainLayout() {
         screenOptions={({ route }) => ({
           // tab bar
           tabBarIcon: ({ focused }) => {
-            let iconName;
+            let iconName: keyof typeof Ionicons.glyphMap = "home"; // Default value
             if (route.name === "index") iconName = "home";
             else if (route.name === "hub") iconName = "file-tray";
             else if (route.name === "options") iconName = "settings";

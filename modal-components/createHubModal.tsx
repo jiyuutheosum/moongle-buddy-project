@@ -34,7 +34,7 @@ export const CreateHubModal: React.FC<CreateHubModalProps> = ({ visible, onClose
 
     try {
       // Call the function to create a new study hub
-      const studyHubId = await createStudyHub(UserData.uid, studyHubName, UserData.username);
+      const studyHubId = await createStudyHub(UserData.uid, studyHubName || "", UserData.username);
       console.log("New study hub created with ID:", studyHubId);
 
       // Reset the input field

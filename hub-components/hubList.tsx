@@ -32,6 +32,12 @@ export const HubList = () => {
 
   // Real-time data fetching using useEffect
   useEffect(() => {
+    if (!userId) {
+      setError("User ID is undefined.");
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = fetchStudyHubsInRealTime(
       userId,
       (fetchedData) => {
