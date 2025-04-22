@@ -39,3 +39,4 @@ app-example
 
 # secret configs
 secret.ts
+node_modules
