@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  ToastAndroid,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { UploadFileModal } from "@/modal-components/uploadFileModal";
 import { useLocalSearchParams } from "expo-router";
 import { doc, getDoc } from "firebase/firestore";
-import { FIREBASE_DB } from "@/firebase-helpers";
+import { FIREBASE_DB, FIREBASE_STORAGE } from "@/firebase-helpers";
 import { useAuth } from "@/utilities";
+import { ref, listAll } from "firebase/storage";
 
 export const FilesHubHeader: React.FC = () => {
   const { user } = useAuth();
   const { id } = useLocalSearchParams(); // Extracting studyHub id
-  const [hubDetails, setHubDetails] = useState({ name: "", ownedBy: "", createdAt: "" });
+  const [hubDetails, setHubDetails] = useState({
+    name: "",
+    ownedBy: "",
+    createdAt: "",
+  });
   const [loading, setLoading] = useState(true);
   const [isFileUploadModalVisible, setFileUploadModalVisible] = useState(false);
 
@@ -45,10 +57,18 @@ export const FilesHubHeader: React.FC = () => {
 
   // FOR FILE UPLOAD MODAL VISIBILITY
   const openFileUploadModal = () => setFileUploadModalVisible(true);
-  const closeFileUploadModal = () => setFileUploadModalVisible(false);
+  const closeFileUploadModal = () => {
+    setFileUploadModalVisible(false);
+  };
 
   if (loading) {
-    return <ActivityIndicator size={40} color="#FF6B6B" style={styles.loadingIndicator} />;
+    return (
+      <ActivityIndicator
+        size={40}
+        color="#FF6B6B"
+        style={styles.loadingIndicator}
+      />
+    );
   }
 
   return (
@@ -57,19 +77,28 @@ export const FilesHubHeader: React.FC = () => {
       <View style={styles.hubDetailsView}>
         <Text style={styles.hubOwner}>Owned by {hubDetails.ownedBy}</Text>
         <Text style={styles.hubName}>{hubDetails.name}</Text>
-        <Text style={styles.hubCreatedAt}>Created on: {hubDetails.createdAt}</Text>
+        <Text style={styles.hubCreatedAt}>
+          Created on: {hubDetails.createdAt}
+        </Text>
       </View>
 
       {/* Button for File Upload */}
       <View style={styles.buttonWrapperView}>
         <TouchableOpacity style={styles.buttons} onPress={openFileUploadModal}>
-          <MaterialIcons style={styles.buttonsIcon} name="file-upload" size={30} />
+          <MaterialIcons
+            style={styles.buttonsIcon}
+            name="file-upload"
+            size={30}
+          />
           <Text style={styles.buttonsText}>Upload File</Text>
         </TouchableOpacity>
       </View>
 
       {/* File Upload Modal */}
-      <UploadFileModal visible={isFileUploadModalVisible} onClose={closeFileUploadModal} />
+      <UploadFileModal
+        visible={isFileUploadModalVisible}
+        onClose={closeFileUploadModal}
+      />
     </View>
   );
 };

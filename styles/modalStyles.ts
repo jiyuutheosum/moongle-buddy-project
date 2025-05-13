@@ -110,10 +110,12 @@ const modalStyles = StyleSheet.create({
     margin: 5,
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 4,
   },
   uploadedFileTitle: {
     fontFamily: "Poppins-Regular",
     color: "#aaa",
+    flex: 1,
   },
   uploadedFileDelIcon: {
     marginVertical: 3,

@@ -1,4 +1,13 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, Alert } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Alert,
+} from "react-native";
 import { Link, router } from "expo-router";
 import authStyles from "../../styles/authStyles";
 // import { linkTo } from "expo-router/build/global-state/routing";
@@ -64,7 +73,10 @@ export default function Login() {
         <View style={authStyles.parentView}>
           {/* logo image */}
           <View style={authStyles.logoView}>
-            <Image style={authStyles.logo} source={require("../../assets/official-logo.png")}></Image>
+            <Image
+              style={authStyles.logo}
+              source={require("../../assets/official-logo.png")}
+            ></Image>
           </View>
 
           {/* screen Label */}
@@ -73,13 +85,21 @@ export default function Login() {
             <Text style={authStyles.title}>Welcome to MOONGLE Buddy!</Text>
 
             {/* subtitle */}
-            <Text style={authStyles.subTitle}>Please login to your existing account.</Text>
+            <Text style={authStyles.subTitle}>
+              Please login to your existing account.
+            </Text>
           </View>
 
           {/* form area = placeholder data for => email => password */}
           <View style={authStyles.formArea}>
-            {errors.allFieldsRequired && <Text style={authStyles.isFalseText}>{errors.allFieldsRequired}</Text>}
-            {errors.isValid && <Text style={authStyles.isFalseText}>{errors.isValid}</Text>}
+            {errors.allFieldsRequired && (
+              <Text style={authStyles.isFalseText}>
+                {errors.allFieldsRequired}
+              </Text>
+            )}
+            {errors.isValid && (
+              <Text style={authStyles.isFalseText}>{errors.isValid}</Text>
+            )}
             {/* email */}
             <TextInput
               textContentType="emailAddress"
@@ -89,7 +109,9 @@ export default function Login() {
               value={email}
               onChangeText={setEmail}
             ></TextInput>
-            {errors.email && <Text style={authStyles.isFalseText}>{errors.email}</Text>}
+            {errors.email && (
+              <Text style={authStyles.isFalseText}>{errors.email}</Text>
+            )}
 
             {/* password */}
             <TextInput
@@ -101,11 +123,16 @@ export default function Login() {
               value={password}
               onChangeText={setPassword}
             ></TextInput>
-            {errors.password && <Text style={authStyles.isFalseText}>{errors.password}</Text>}
+            {errors.password && (
+              <Text style={authStyles.isFalseText}>{errors.password}</Text>
+            )}
 
             {/* continue button */}
             {/* nag simulate pako diri mao router push pa nakabutang */}
-            <TouchableOpacity style={authStyles.continueButton} onPress={() => handleLogin()}>
+            <TouchableOpacity
+              style={authStyles.continueButton}
+              onPress={() => handleLogin()}
+            >
               <Text style={authStyles.continueLabel}>Continue</Text>
             </TouchableOpacity>
           </View>
@@ -116,7 +143,9 @@ export default function Login() {
           <View style={authStyles.switchScreenView}>
             <Text style={authStyles.switchScreenText}>
               {/* forgot pass */}
-              <Text style={authStyles.forgotPassText}>Forgot Password</Text> | New User?{" "}
+              <Text style={authStyles.forgotPassText}>
+                Forgot Password | New User?{" "}
+              </Text>
               <Link href={"/(auth)/signup"} style={authStyles.toSingupLink}>
                 Signup
               </Link>
