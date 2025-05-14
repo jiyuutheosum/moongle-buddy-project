@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   FlatList,
   ToastAndroid,
+  Platform,
 } from "react-native";
 // import hubScreensStyles from "@/styles/hubScreensStyles";
 import hubScreensStyles from "../styles/hubScreensStyles";
@@ -128,11 +129,13 @@ export const FilesList = () => {
               fileType = "*/*"; // fallback for unknown types
             }
 
-            IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
-              data: url,
-              flags: 1,
-              type: fileType,
-            });
+            if (Platform.OS == "android") {
+              IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
+                data: url,
+                flags: 1,
+                type: fileType,
+              });
+            }
           }}
         >
           {/* file title */}
